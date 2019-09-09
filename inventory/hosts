@@ -1,0 +1,5 @@
+[centos]
+centos_7 ansible_host=10.10.10.35
+
+[ubuntu]
+ubuntu_bionic_1804 ansible_host=10.10.10.34
