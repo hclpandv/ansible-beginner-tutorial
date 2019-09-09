@@ -1,0 +1,27 @@
+---
+# ansible-playbook copy.yml
+
+- name: run tasks on all hosts
+  hosts: "*"
+  tasks:
+    - name: copy file from local host to remote host (relative path, ./files/)
+      copy:
+        src: file.yml
+        dest: $HOME/test_file
+    
+    - name: copy file from local host to remote host (absolute path)
+      copy:
+        src: /path/to/ansible/files/test_file
+        dest: $HOME/test_file
+
+    - name: copy file between locations on the remote host
+      copy:
+        src: $HOME/test_file
+        remote_src: true
+        dest: $HOME/test_file2
+    
+    - name: write templated text content into a file on the remote host
+      copy:
+        dest: $HOME/test_file
+        content: "Hello, {{ ansible_user }}!"
+    

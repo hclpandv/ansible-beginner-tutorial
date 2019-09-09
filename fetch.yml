@@ -1,0 +1,23 @@
+---
+# ansible-playbook copy.yml
+# Reverse of copy module to fetch data from remote host
+
+- name: run tasks on all hosts
+  hosts: "*"
+  tasks:
+    - name: ensure file exists
+      file:
+        path: "/home/{{ ansible_user }}/test_file"
+        state: touch
+    
+    - name: fetch test_file
+      fetch: 
+        src: "/home/{{ ansible_user }}/test_file"
+        dest: fetched
+    
+    # If you do not want full dercetory structure to be copied
+    - name: fetch test_file
+      fetch: 
+        src: "/home/{{ ansible_user }}/test_file"
+        dest: fetched1  #fetched/ to copy into a directory
+        flat: true
